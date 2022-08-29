@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <script>
+        L_NO_TOUCH = false;
+        L_DISABLE_3D = false;
+    </script>
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css" />
+
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        #map_d506fee5e7404841bc7a1698af528b7a {
+            position: relative;
+            width: 50.0%;
+            height: 50.0%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #codestates {
+            margin-left: left;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+
+        <a href="#" id='codestates' class="navbar-brand d-flex align-items-center">
+            <strong>음용가능 지역 알아보기</strong>
+        </a>
+
+    </div>
+
+    <div class="folium-map" id="map_d506fee5e7404841bc7a1698af528b7a">
+    </div>
+    <section class="map">
+        <script>
+            var map_d506fee5e7404841bc7a1698af528b7a = L.map(
+                "map_d506fee5e7404841bc7a1698af528b7a", {
+                    center: [37, 127],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 7.4,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            var tile_layer_bbf9a212639545de9ccecbae58427a5d = L.tileLayer(
+                "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg", {
+                    "attribution": "Map tiles by \u003ca href=\"http://stamen.com\"\u003eStamen Design\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by/3.0\"\u003eCC BY 3.0\u003c/a\u003e. Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by-sa/3.0\"\u003eCC BY SA\u003c/a\u003e.",
+                    "detectRetina": false,
+                    "maxNativeZoom": 18,
+                    "maxZoom": 18,
+                    "minZoom": 0,
+                    "noWrap": false,
+                    "opacity": 1,
+                    "subdomains": "abc",
+                    "tms": false
+                }
+            ).addTo(map_d506fee5e7404841bc7a1698af528b7a);
+
+            
+            var circle_marker_b4b252ffbf864b48bb4238f758e3c42a = L.circleMarker(
+                [ 37 , 127], {
+                    "bubblingMouseEvents": true,
+                    "color": "red",
+                    "dashArray": null,
+                    "dashOffset": null,
+                    "fill": "red",
+                    "fillColor": "red",
+                    "fillOpacity": 100,
+                    "fillRule": "evenodd",
+                    "lineCap": "round",
+                    "lineJoin": "round",
+                    "opacity": 1.0,
+                    "radius": 3,
+                    "stroke": true,
+                    "weight": 3
+                }
+            ).addTo(map_d506fee5e7404841bc7a1698af528b7a);
+
+
+            circle_marker_b4b252ffbf864b48bb4238f758e3c42a.bindTooltip(
+                `<div>
+                  원하는 위치를 찍어주세요.
+              </div>`, {
+                    "sticky": true
+                }
+            );
+            
+            var lat_lng_popup_1b16ae955e134142aae044160119a000 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_1b16ae955e134142aae044160119a000
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_d506fee5e7404841bc7a1698af528b7a);
+                    }
+                    map_d506fee5e7404841bc7a1698af528b7a.on('click', latLngPop);
+        </script>
+    </section>
+
+    <section class="mapping">
+        <div align="center">
+            <br>
+            <!-- <iframe src="/map" style = "width: 800px; height: 500px; border: 2px;" ></iframe> -->
+
+        </div>
+    </section>
+
+    <section class="shap">
+        <form action="/map2" method="POST" class="input-form">
+            <div align="center">
+                <iframe srcdoc="{{shap_html}}" style="width: 800px; height: 130px; border: 2px;"></iframe>
+            </div>
+            <style>
+                table,
+                td {
+                    border: 1px solid #42547c;
+                }
+
+                table,
+                th,
+                td {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                td,
+                th {
+                    text-align: center;
+                }
+            </style>
+            <table>
+                <tr>
+                    <td colspan="4">Open API 변수 입력</td>
+                </tr>
+                <tr>
+                    <td>Year</td>
+                    <td>Month</td>
+                    <td>Page No.</td>
+                    <td>Row No.</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="id_4" placeholder="2022" /></td>
+                    <td><input type="text" name="id_5" placeholder="01" /></td>
+                    <td><input type="text" name="id_6" placeholder="1" /></td>
+                    <td><input type="text" name="id_7" placeholder="1" /></td>
+                    <br>
+                    <td><input type="submit" value="submit" class="input-btn"></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+
+</body>
+
+</html>
